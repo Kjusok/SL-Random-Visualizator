@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnFigure()
     {
-        var square = Instantiate(_figurePrefabs[_numberSpawnedFigure],
+        var figure = Instantiate(_figurePrefabs[_numberSpawnedFigure],
                 new Vector2(Random.Range(_minValue.x * _gameBoard.sizeDelta.x, _maxValue.x * _gameBoard.sizeDelta.x),
                 Random.Range(_minValue.y * _gameBoard.sizeDelta.y, _maxValue.y * _gameBoard.sizeDelta.y)), Quaternion.identity);
-        square.transform.SetParent(_gameBoard.transform, false);
+        figure.transform.SetParent(_gameBoard.transform, false);
         _cooldownForFigure = Random.Range(_minCooldown, _maxCooldown);
         _livetimeForFigure = Random.Range(_minLifeTime, _maxLifeTime);
         _timerForFigure = _cooldownForFigure;
-        square.GetComponent<Figure>().TimeOfLive = _livetimeForFigure;
+        figure.GetComponent<Figure>().TimeOfLive = _livetimeForFigure;
     }
     void Update()
     {
