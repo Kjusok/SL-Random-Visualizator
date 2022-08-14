@@ -10,23 +10,23 @@ public class Figure : MonoBehaviour
     private SpriteRenderer _sr;
 
     public float TimeOfLive;
-    void Start()
+    private void Start()
     {
         _liveScale.maxValue = TimeOfLive;
-        this._sr = this.GetComponent<SpriteRenderer>();
+        _sr = GetComponent<SpriteRenderer>();
     }
     private void SpawnDestroyEffect()
     {
         Vector2 figurePos = gameObject.transform.position;
-        Vector2 spawnPosition = new Vector2(figurePos.x, figurePos.y);
+        var spawnPosition = new Vector2(figurePos.x, figurePos.y);
         GameObject effect = Instantiate(_destroyEffect.gameObject, spawnPosition, Quaternion.identity);
 
         var mm = effect.GetComponent<ParticleSystem>().main;
-        mm.startColor = this._sr.color;
+        mm.startColor = _sr.color;
         Destroy(effect, _destroyEffect.main.startLifetime.constant);
     }
 
-    void Update()
+    private void Update()
     {
         if (TimeOfLive > 0)
         {
@@ -34,11 +34,13 @@ public class Figure : MonoBehaviour
             _liveScale.value = TimeOfLive;
 
             _timeForDeath.text = TimeOfLive.ToString("F1");
+
+            if (TimeOfLive <= 0)
+            {
+                SpawnDestroyEffect();
+                Destroy(gameObject);
+            }
         }
-        if (TimeOfLive <= 0)
-        {
-            SpawnDestroyEffect();
-            Destroy(this.gameObject);
-        }
+
     }
 }

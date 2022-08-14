@@ -3,95 +3,98 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private InputField _minLiveTime;
-    [SerializeField] private InputField _maxLiveTime;
-    [SerializeField] private InputField _minCooldown;
-    [SerializeField] private InputField _maxCooldown;
-    [SerializeField] private GameObject[] _figures;
+    [SerializeField] private InputField _minLifeTimeIputField;
+    [SerializeField] private InputField _maxLifeTimeIputField;
+    [SerializeField] private InputField _minCooldownIputField;
+    [SerializeField] private InputField _maxCooldownIputField;
     [SerializeField] private Toggle _square;
-    [SerializeField] private Toggle _triangel;
+    [SerializeField] private Toggle _triangle;
     [SerializeField] private Toggle _circle;
+    [SerializeField] private GameObject Canvas;
+    [SerializeField] private RectTransform _gameBoard;
 
-    public GameObject Canvas;
+    [SerializeField] private GameObject[] _figurePrefabs;
 
-    private float _lastTimeForSquare = 0f;
-    private float _lastTimeForTriangel = 0f;
-    private float _lastTimeForCircle = 0f;
-    private float _cooldownForSquare;
-    private float _cooldownForTriangel;
-    private float _cooldownForCircle;
-    private float _livetimeForSquare;
-    private float _livetimeForTriangel;
-    private float _livetimeForCircle;
+    private Vector2 _minValue = new Vector2(x: 0.1f, y: 0.1f);
+    private Vector2 _maxValue = new Vector2(x: 0.95f, y: 0.9f);
+    private float _timerForFigure;
+    private float _cooldownForFigure;
+    private float _livetimeForFigure;
+    private float _minLifeTime;
+    private float _maxLifeTime;
+    private float _minCooldown;
+    private float _maxCooldown;
+    private int _numberSpawnedFigure;
 
-    private float _minLT;
-    private float _maxLT;
-    private float _minCD;
-    private float _maxCD;
-
-    public void InputMinOrMaxForLivetime()
+    private void Awake()
     {
-        float.TryParse(_minLiveTime.text, out _minLT);
-        float.TryParse(_maxLiveTime.text, out _maxLT);
-        if(_minLT >=0 && _maxLT > 0)
+        _minLifeTimeIputField.text = "5";
+        _maxLifeTimeIputField.text = "5";
+        _minCooldownIputField.text = "5";
+        _maxCooldownIputField.text = "5";
+    }
+    public void InputMinForLifeTime()
+    {
+        _minLifeTime = float.Parse(_minLifeTimeIputField.text);
+    }
+    public void InputMaxForLifeTime()
+    {
+        _maxLifeTime = float.Parse(_maxLifeTimeIputField.text);
+    }
+    public void InputMinForCooldown()
+    {
+        _minCooldown = float.Parse(_minCooldownIputField.text);
+    }
+    public void InputMaxForCooldown()
+    {
+        _maxCooldown = float.Parse(_maxCooldownIputField.text);
+    }
+    private void SpawnSquare()
+    {
+        if (_square.isOn && _numberSpawnedFigure == 0)
         {
-            _livetimeForSquare = Random.Range(_minLT, _maxLT);
-            _livetimeForTriangel = Random.Range(_minLT, _maxLT);
-            _livetimeForCircle = Random.Range(_minLT, _maxLT);
+            SpawnFigure();
         }
     }
-    public void InputMinOrMaxForCooldown()
+    private void SpawnTriangle()
     {
-        float.TryParse(_minCooldown.text, out _minCD);
-        float.TryParse(_maxCooldown.text, out _maxCD);
-        if(_minCD >= 0 && _maxCD > 0)
+        if (_triangle.isOn && _numberSpawnedFigure == 1)
         {
-            _cooldownForSquare = Random.Range(_minCD, _maxCD);
-            _cooldownForTriangel = Random.Range(_minCD, _maxCD);
-            _cooldownForCircle = Random.Range(_minCD, _maxCD);
+            SpawnFigure();
         }
     }
-    private void CreateSquare()
+    private void SpawnCircle()
     {
-        if (_square.isOn && Time.time>(_lastTimeForSquare + _cooldownForSquare) && _cooldownForSquare != 0 && _livetimeForSquare !=0)
+        if (_circle.isOn && _numberSpawnedFigure == 2)
         {
-            var square = Instantiate(_figures[0], new Vector2(Random.Range(-807, 264), Random.Range(-371, 357)), Quaternion.identity);
-            square.transform.SetParent(Canvas.transform, false);
-            _lastTimeForSquare = Time.time;
-            _cooldownForSquare = Random.Range(_minCD, _maxCD);
-            _livetimeForSquare = Random.Range(_minLT, _maxLT);
-            square.GetComponent<Figure>().TimeOfLive = _livetimeForSquare;
+            SpawnFigure();
         }
     }
-    private void CreateTriangle()
+    private void SpawnFigure()
     {
-        if (_triangel.isOn && Time.time > (_lastTimeForTriangel + _cooldownForTriangel) && _cooldownForTriangel != 0 && _livetimeForTriangel !=0)
-        {
-            var triangel = Instantiate(_figures[1], new Vector2(Random.Range(-807, 264), Random.Range(-371, 357)), Quaternion.identity);
-            triangel.transform.SetParent(Canvas.transform, false);
-            _lastTimeForTriangel = Time.time;
-            _cooldownForTriangel = Random.Range(_minCD, _maxCD);
-            _livetimeForTriangel = Random.Range(_minLT, _maxLT);
-            triangel.GetComponent<Figure>().TimeOfLive = _livetimeForTriangel;
-        }
-    }
-    private void CreateCircle()
-    {
-        if (_circle.isOn && Time.time > (_lastTimeForCircle + _cooldownForCircle) && _cooldownForCircle != 0 && _livetimeForCircle !=0)
-        {
-            _livetimeForCircle = Random.Range(_minLT, _maxLT);
-            var circle = Instantiate(_figures[2], new Vector2(Random.Range(-807, 264), Random.Range(-371, 357)), Quaternion.identity);
-            circle.transform.SetParent(Canvas.transform, false);
-            _lastTimeForCircle = Time.time;
-            _cooldownForCircle = Random.Range(_minCD, _maxCD);
-            _livetimeForCircle = Random.Range(_minLT, _maxLT);
-            circle.GetComponent<Figure>().TimeOfLive = _livetimeForCircle;
-        }
+        var square = Instantiate(_figurePrefabs[_numberSpawnedFigure],
+                new Vector2(Random.Range(_minValue.x * _gameBoard.sizeDelta.x, _maxValue.x * _gameBoard.sizeDelta.x),
+                Random.Range(_minValue.y * _gameBoard.sizeDelta.y, _maxValue.y * _gameBoard.sizeDelta.y)), Quaternion.identity);
+        square.transform.SetParent(_gameBoard.transform, false);
+        _cooldownForFigure = Random.Range(_minCooldown, _maxCooldown);
+        _livetimeForFigure = Random.Range(_minLifeTime, _maxLifeTime);
+        _timerForFigure = _cooldownForFigure;
+        square.GetComponent<Figure>().TimeOfLive = _livetimeForFigure;
     }
     void Update()
     {
-        CreateSquare();
-        CreateTriangle();
-        CreateCircle();
+        _timerForFigure -= Time.deltaTime;
+
+        if (_timerForFigure <= 0 &&
+            _maxLifeTime >= _minLifeTime &&
+            _maxCooldown >= _minCooldown &&
+            _minLifeTime >= 0 &&
+            _minCooldown >= 0)
+        {
+            _numberSpawnedFigure = Random.Range(0, 3);
+            SpawnSquare();
+            SpawnTriangle();
+            SpawnCircle();
+        }
     }
 }
