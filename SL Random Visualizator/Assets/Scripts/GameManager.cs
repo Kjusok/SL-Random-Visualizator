@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Toggle _square;
     [SerializeField] private Toggle _triangle;
     [SerializeField] private Toggle _circle;
-    [SerializeField] private GameObject Canvas;
     [SerializeField] private RectTransform _gameBoard;
 
     [SerializeField] private GameObject[] _figurePrefabs;
