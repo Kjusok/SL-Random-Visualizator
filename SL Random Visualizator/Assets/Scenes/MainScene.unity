@@ -3593,9 +3593,6 @@ MonoBehaviour:
   m_CharacterLimit: 2
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnValueChanged:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2098065533}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
@@ -3609,6 +3606,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -4446,9 +4446,6 @@ MonoBehaviour:
   m_CharacterLimit: 2
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnValueChanged:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2098065533}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
@@ -4462,6 +4459,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -4667,9 +4667,6 @@ MonoBehaviour:
   m_CharacterLimit: 2
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnValueChanged:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2098065533}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
@@ -4683,6 +4680,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -5142,9 +5142,6 @@ MonoBehaviour:
   m_CharacterLimit: 2
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnValueChanged:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2098065533}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
@@ -5158,6 +5155,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -5479,10 +5479,9 @@ MonoBehaviour:
   _maxLifeTimeIputField: {fileID: 1956336939}
   _minCooldownIputField: {fileID: 1859819057}
   _maxCooldownIputField: {fileID: 1226060279}
-  _square: {fileID: 926901703}
-  _triangle: {fileID: 1862986709}
-  _circle: {fileID: 60971896}
-  Canvas: {fileID: 2098065528}
+  _squareCheckBox: {fileID: 926901703}
+  _triangleCheckBox: {fileID: 1862986709}
+  _circleCheckBox: {fileID: 60971896}
   _gameBoard: {fileID: 1371649805}
   _figurePrefabs:
   - {fileID: 7783506400648163670, guid: f4b72c6a86ccd244ca224300f3230546, type: 3}

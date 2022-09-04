@@ -9,10 +9,10 @@ public class Figure : MonoBehaviour
 
     private SpriteRenderer _sr;
 
-    public float TimeOfLive;
+    private float _timeOfLive;
     private void Start()
     {
-        _liveScale.maxValue = TimeOfLive;
+        _liveScale.maxValue = _timeOfLive;
         _sr = GetComponent<SpriteRenderer>();
     }
     private void SpawnDestroyEffect()
@@ -25,22 +25,24 @@ public class Figure : MonoBehaviour
         mm.startColor = _sr.color;
         Destroy(effect, _destroyEffect.main.startLifetime.constant);
     }
-
+    public void Initialize(float liveTimeForFigure)
+    {
+        _timeOfLive = liveTimeForFigure;
+    }
     private void Update()
     {
-        if (TimeOfLive > 0)
+        if (_timeOfLive > 0)
         {
-            TimeOfLive -= Time.deltaTime;
-            _liveScale.value = TimeOfLive;
+            _timeOfLive -= Time.deltaTime;
+            _liveScale.value = _timeOfLive;
 
-            _timeForDeath.text = TimeOfLive.ToString("F1");
+            _timeForDeath.text = _timeOfLive.ToString("F1");
 
-            if (TimeOfLive <= 0)
+            if (_timeOfLive <= 0)
             {
                 SpawnDestroyEffect();
                 Destroy(gameObject);
             }
         }
-
     }
 }
